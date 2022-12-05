@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import shlex
 import sys
 from models.base_model import BaseModel
 from models.__init__ import storage
@@ -118,13 +119,14 @@ class HBNBCommand(cmd.Cmd):
         my_dict = {}
         if '=' in line:
             my_dict = {}
-            line = line.split(' ')
+            line = shlex.split(line, posix=False)
+            print(line)
             for pm in line[1:]:
-                if '=' not in pm or ' ' in pm:
+                if '=' not in pm:
                     continue
                 vp = pm.split('=')
                 if vp[1][0] == '"' and vp[1][-1] == '"':
-                    vp[1] = vp[1][1:-1]
+                    vp[1] = vp[1][1:-1].replace(' ', '_')
                 else:
                     try:
                         vp[1] = int(vp[1])
