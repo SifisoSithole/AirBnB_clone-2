@@ -119,14 +119,14 @@ class HBNBCommand(cmd.Cmd):
         my_dict = {}
         if '=' in line:
             my_dict = {}
-            line = shlex.split(line, posix=False)
+            line = line.split()
             print(line)
             for pm in line[1:]:
                 if '=' not in pm:
                     continue
                 vp = pm.split('=')
                 if vp[1][0] == '"' and vp[1][-1] == '"':
-                    vp[1] = vp[1][1:-1].replace(' ', '_')
+                    vp[1] = vp[1][1:-1].replace('_', ' ')
                 else:
                     try:
                         vp[1] = int(vp[1])
