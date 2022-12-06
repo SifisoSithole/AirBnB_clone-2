@@ -120,7 +120,6 @@ class HBNBCommand(cmd.Cmd):
         if '=' in line:
             my_dict = {}
             line = line.split()
-            print(line)
             for pm in line[1:]:
                 if '=' not in pm or ' ' in pm:
                     continue
@@ -148,11 +147,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[args]()
-        storage.save()
         if len(my_dict) != 0:
-            up = f"{args} {new_instance.id} {str(my_dict)}"
-            HBNBCommand.do_update(None, up)
+            new_instance.__dict__.update(my_dict)
         print(new_instance.id)
+        storage.new(new_instance)
         storage.save()
 
     def help_create(self):
@@ -216,7 +214,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -235,7 +233,7 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
@@ -348,6 +346,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
