@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
             line = line.split()
             print(line)
             for pm in line[1:]:
-                if '=' not in pm:
+                if '=' not in pm or ' ' in pm:
                     continue
                 vp = pm.split('=')
                 if vp[1][0] == '"' and vp[1][-1] == '"':
@@ -135,6 +135,8 @@ class HBNBCommand(cmd.Cmd):
                             vp[1] = float(vp[1])
                         except Exception:
                             continue
+                    except Exception:
+                        continue
                 my_dict[vp[0]] = vp[1]
             args = line[0]
         else:
