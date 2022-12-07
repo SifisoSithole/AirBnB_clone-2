@@ -45,6 +45,7 @@ class DBStorage:
             objs.append(self.__session.query(User).all())
             objs.append(self.__session.query(State).all())
             objs.append(self.__session.query(City).all())
+            objs.append(self.__session.query(Place).all())
             #objs.append(self.__session.query(Amenity).all())
             #objs.append(self.__session.query(Review).all())
         for obj in objs:
