@@ -17,8 +17,7 @@ def do_pack():
     try:
         if isdir("versions") is False:
             local("mkdir versions")
-        name = f"versions/web_static_{datetime.now().\
-                 strftime(%Y%m%d%H%M%S)}.tgz"
+        name = f"versions/web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
         local(f"tar -cvzf {name} web_static")
         return name
     except Exception:
