@@ -10,7 +10,7 @@ from fabric.api import local
 
 
 def do_pack():
-    """ Create archive """
+    """Creates a tgz archive for deployment"""
     try:
         if isdir("versions") is False:
             local("mkdir versions")
