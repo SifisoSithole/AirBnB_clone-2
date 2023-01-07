@@ -10,9 +10,7 @@ from os.path import isdir
 from fabric.api import local
 
 def do_pack():
-    """
-    Creates a tgz archive for deployment
-
+    """Creates a tgz archive for deployment
     Return: returns archive path if created or None if failed
     """
     try:
