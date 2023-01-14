@@ -19,10 +19,11 @@ def hbnb():
     """returns hbnb"""
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_cool(text):
     """returns c <text>"""
-    return 'C %s' % text
+    return 'C %s' % text.replace('_', ' ')
 
 
 if __name__ == '__main__':
