@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all states
+Starts a flask application that lists all states
 """
 
 from flask import Flask, render_template
