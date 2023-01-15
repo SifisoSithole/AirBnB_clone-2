@@ -24,7 +24,7 @@ class State(BaseModel, Base):
         def cities(self):
             """Returns a list of cities for the current state"""
             cityList = []
-            for city in models.storage.all(City).pop('_sa_instance_state').values():
+            for city in models.storage.all(City).values():
                 if city.state_id == self.id:
                     cityList.append(city)
             return cityList
