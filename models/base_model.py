@@ -4,10 +4,10 @@ import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import declarative_base
-from os import environ
+from os import getenv
+
 
 Base = declarative_base()
-
 
 class BaseModel:
     """A base class for all hbnb models"""
