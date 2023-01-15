@@ -41,6 +41,9 @@ class DBStorage:
         objs = []
         if cls is not None:
             objs = self.__session.query(cls).all()
+            for obj in objs:
+                key = f'{type(obj).__name__}.{obj.id}'
+                obj_dict[key] = obj
         else:
             objs.append(self.__session.query(User).all())
             objs.append(self.__session.query(State).all())
@@ -48,9 +51,10 @@ class DBStorage:
             objs.append(self.__session.query(Place).all())
             #objs.append(self.__session.query(Amenity).all())
             #objs.append(self.__session.query(Review).all())
-        for obj in objs:
-            key = f'{type(obj).__name__}.{obj.id}'
-            obj_dict[key] = obj
+            for lst in objs:
+                for obj in lst:
+                    key = f'{type(obj).__name__}.{obj.id}'
+                    obj_dict[key] = obj
         return obj_dict
 
     def new(self, obj):
@@ -71,3 +75,7 @@ class DBStorage:
         session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session)
         self.__session = Session()
+
+    def close(self):
+        """closes a session"""
+        self.__session.close()

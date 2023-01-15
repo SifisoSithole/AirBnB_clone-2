@@ -63,3 +63,7 @@ class FileStorage:
                 if obj.id == cls_id[1] and type(obj).__name__ == cls_id[0]:
                     del FileStorage.__objects[k]
                     break
+
+    def close(self):
+        """calls reload method"""
+        FileStorage.reload(self)
